@@ -173,3 +173,26 @@ print(f"\nProbabilites par classe :")
 for classe, proba in zip(model_loaded.classes_, probas):
     bar = '#' * int(proba * 30)
     print(f"{classe:8s} : {proba:.1%} {bar}")
+
+
+importances = model.feature_importances_
+for name, imp in sorted(zip(feature_cols, importances), key=lambda x: x[1], reverse=True):
+    print(f"  {name:20s} : {imp:.3f}")
+
+
+# Exercice 2 - 3 patients fictifs
+
+# Patient 1 : jeune sans symptômes
+p1_features = [17, le_sexe_loaded.transform(['M'])[0], 37.2, 115, 0, 0, 0, le_region_loaded.transform(['Dakar'])[0]]
+diag1 = model_loaded.predict([p1_features])[0]
+print(f"Patient 1 (jeune sans symptômes) : {diag1}")
+
+# Patient 2 : adulte avec forte fièvre
+p2_features = [35, le_sexe_loaded.transform(['F'])[0], 40.1, 125, 1, 1, 1, le_region_loaded.transform(['Thiès'])[0]]
+diag2 = model_loaded.predict([p2_features])[0]
+print(f"Patient 2 (adulte forte fièvre) : {diag2}")
+
+# Patient 3 : personne âgée avec toux
+p3_features = [68, le_sexe_loaded.transform(['M'])[0], 38.5, 140, 1, 1, 0, le_region_loaded.transform(['Saint-Louis'])[0]]
+diag3 = model_loaded.predict([p3_features])[0]
+print(f"Patient 3 (personne âgée avec toux) : {diag3}")
