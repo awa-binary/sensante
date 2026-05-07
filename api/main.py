@@ -1,5 +1,6 @@
 # api/main.py
 # API FastAPI pour SenSante - Assistant pre-diagnostic medical
+#Lab 3 - Intégration de Modéle IA - ESP/UCAD
 
 from fastapi import FastAPI
 
@@ -10,18 +11,13 @@ from pydantic import BaseModel, Field
 class PatientInput(BaseModel):
     """Donnees d'entree : les symptomes d'un patient."""
 
-    age: int = Field(
-        ...,
-        ge=0,
-        le=120,
-        description="Age en annees"
-    )
+    age: int = Field(..., ge=0, le=120, description="Age en annees")
 
     sexe: str = Field(
         ...,
         description="Sexe : M ou F"
     )
-
+ 
     temperature: float = Field(
         ...,
         ge=35.0,
