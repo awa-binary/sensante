@@ -100,15 +100,26 @@ import numpy as np
 
 # --- Charger le modele et les encodeurs au demarrage ---
 
+from huggingface_hub import hf_hub_download
+
 print("Chargement du modele...")
 
-model = joblib.load("models/model.pkl")
-le_sexe = joblib.load("models/encoder_sexe.pkl")
-le_region = joblib.load("models/encoder_region.pkl")
-feature_cols = joblib.load("models/feature_cols.pkl")
-
-print(f"Modele charge : {type(model).__name__}")
-print(f"Classes : {list(model.classes_)}")
+model = joblib.load(hf_hub_download(
+    repo_id="awa-binary/SenSanteModel",
+    filename="model.pkl"
+))
+le_sexe = joblib.load(hf_hub_download(
+    repo_id="awa-binary/SenSanteModel",
+    filename="encoder_sexe.pkl"
+))
+le_region = joblib.load(hf_hub_download(
+    repo_id="awa-binary/SenSanteModel",
+    filename="encoder_region.pkl"
+))
+feature_cols = joblib.load(hf_hub_download(
+    repo_id="awa-binary/SenSanteModel",
+    filename="feature_cols.pkl"
+))
 
 # Route de base : verifier que l'API fonctionne
 @app.get("/health")
@@ -316,3 +327,15 @@ def explain(data: ExplainInput):
         )
 
     return ExplainOutput(explication=explication)
+
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+# Servir le frontend comme fichier statique
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+@app.get("/")
+def serve_frontend():
+    """ Servir la page d'accueil. """
+    return FileResponse("frontend/index.html")
