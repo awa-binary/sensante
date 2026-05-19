@@ -1,25 +1,37 @@
+---
+title: Sensante
+emoji: 🏥
+colorFrom: red
+colorTo: pink
+sdk: docker
+pinned: false
+---
+
 # SenSante
 
 Assitant de pre-diagnostic medical pour le Senegal.
 
-##  Description 
+## Description
 
-SenSante utilise le Machine Learning pour aider au pre-diagnostic des maladies 
-courantes (paludisme, grippe, typhoïde) a partir des symptomes du patient.
+SenSante utilise le Machine Learning pour aider au pre-diagnostic des maladies
+courantes (paludisme, grippe, typhoïde) à partir des symptômes du patient.
 
+## Demo en ligne
 
-##  Structure du projet
+https://awa-binary-sensante.hf.space
 
-- `data/` : Donnees patients (CVS)
-- `models/` : Models ML serialise
-- `api/` : API FastAPI
-- `frontend/` : Interface web
-- `notebooks/` : Scritps d'exploration
+## Stack
 
-##  Auteur 
+- scikit-learn (modele ML)
+- FastAPI (API REST)
+- Tailwind CSS (frontend responsive)
+- Groq / Llama 3 (explication LLM)
+- Docker (conteneurisation)
 
-Awa Pène - L2 GLSI - ESP/UCAD
+## Auteur
 
-## Cours 
+Awa Pène - L2 GLSI - ESP / UCAD - 2026
 
-Integration de Modele IA - Dr El Hadji Bassirou TOURE 
+## Cours
+
+Integration de Modele IA - Dr El Hadji Bassirou TOURE
